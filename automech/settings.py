@@ -76,9 +76,7 @@ WSGI_APPLICATION = 'automech.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL')
-    )
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
 # If you don't already have it, you might also need:
