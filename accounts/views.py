@@ -11,6 +11,12 @@ from .serializers import CustomUserSerializer, VehicleOwnerSerializer, VehicleSe
 from rest_framework import generics
 from .models import CustomUser, VehicleOwner, Vehicle, Mechanic, AutoRepairCompany, ServiceRequest, Appointment
 
+
+
+def landing_page(request):
+    return render(request, 'dashboards/landing.html')
+
+
 #Register users to our webapp then redirect to their respective dashboards
 def register(request):
     if request.method == 'POST':

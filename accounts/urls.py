@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from .views import setup_profile
-from .views import add_vehicle, search_mechanics, delete_vehicle,owner_dashboard, mechanic_dashboard, company_dashboard,edit_vehicle, vehicle_detail,book_service_appointment,update_profile,mechanic_appointments,mechanic_calendar
+from .views import add_vehicle, search_mechanics, landing_page, delete_vehicle,owner_dashboard, mechanic_dashboard, company_dashboard,edit_vehicle, vehicle_detail,book_service_appointment,update_profile,mechanic_appointments,mechanic_calendar
 from .views import CustomUserList, CustomUserDetail, VehicleOwnerList, VehicleOwnerDetail, VehicleList, VehicleDetail, MechanicList, MechanicDetail, AutoRepairCompanyList, AutoRepairCompanyDetail, ServiceRequestList, ServiceRequestDetail, AppointmentList, AppointmentDetail
 from django.conf.urls.static import static
 from django.conf import settings
@@ -14,6 +14,7 @@ from django.conf import settings
 urlpatterns = [
     
     #General Functionality
+    path('', landing_page, name='landing'),
     path('logout/', views.custom_logout, name='logout'),
     path('logout/confirmation/', views.logout_confirmation, name='logout_confirmation'),
     path('register/', views.register, name='register'),
