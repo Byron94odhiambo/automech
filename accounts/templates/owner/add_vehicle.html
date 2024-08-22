@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Vehicle{% endblock %}
+
+{% block content %}
+<div class="add-vehicle-container">
+    <h2>Add a New Vehicle</h2>
+    <form method="post" class="add-vehicle-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.make.label_tag }}
+            {{ form.make }}
+        </div>
+        <div class="form-group">
+            {{ form.model.label_tag }}
+            {{ form.model }}
+        </div>
+        <div class="form-group">
+            {{ form.year.label_tag }}
+            {{ form.year }}
+        </div>
+        <div class="form-group">
+            {{ form.vin.label_tag }}
+            {{ form.vin }}
+        </div>
+        <button type="submit" class="btn btn-primary">Add Vehicle</button>
+    </form>
+</div>
+{% endblock %}

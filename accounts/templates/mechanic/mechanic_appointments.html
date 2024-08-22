@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Upcoming Appointments{% endblock %}
+
+{% block content %}
+<h2>Upcoming Appointments</h2>
+
+<ul>
+    {% for appointment in upcoming_appointments %}
+    <li>
+        <strong>Date:</strong> {{ appointment.scheduled_date }}<br>
+        <strong>Vehicle:</strong> {{ appointment.service_request.vehicle.make }} {{ appointment.service_request.vehicle.model }}<br>
+        <strong>Service:</strong> {{ appointment.service_request.issue_description }}<br>
+        <strong>Location:</strong> {{ appointment.location }}<br>
+        <strong>Status:</strong> {{ appointment.service_request.status }}<br>
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+
+{% endblock %}

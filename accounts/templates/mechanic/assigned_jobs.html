@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Assigned Jobs{% endblock %}
+
+{% block content %}
+<div class="assigned-jobs-container">
+    <h2 class="assigned-jobs-title">Assigned Jobs</h2>
+    <ul class="job-list">
+        {% for job in assigned_jobs %}
+        <li class="job-item">
+            <div class="job-details">
+                <h3 class="job-vehicle">{{ job.vehicle.make }} {{ job.vehicle.model }} ({{ job.vehicle.year }})</h3>
+                <p class="job-service"><strong>Service Type:</strong> {{ job.issue_description }}</p>
+                <p class="job-deadline"><strong>Deadline:</strong> {{ job.updated_at|date:"Y-m-d" }}</p>
+                <p class="job-status"><strong>Status:</strong> {{ job.get_status_display }}</p>
+                <a href="{% url 'job_detail' job.id %}" class="btn job-detail-btn">View Job Details</a>
+            </div>
+        </li>
+        {% empty %}
+        <p>No jobs currently assigned to you.</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

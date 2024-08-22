@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}My Vehicles{% endblock %}
+
+{% block content %}
+<div class="vehicle-list-container">
+    <h2>My Vehicles</h2>
+    <ul class="vehicle-list">
+        {% for vehicle in vehicles %}
+            <li class="vehicle-item">
+                <div class="vehicle-info">
+                    <h3>{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h3>
+                    <p><strong>License plate:</strong> {{ vehicle.license_plate }}</p>
+                </div>
+                <div class="vehicle-actions">
+                    <a href="{% url 'vehicle_detail' vehicle.id %}" class="btn">View Details</a>
+                    <a href="{% url 'book_service_appointment' vehicle.id %}" class="btn btn-primary">Book Service</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

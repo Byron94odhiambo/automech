@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Mechanic Calendar{% endblock %}
+
+{% block content %}
+<h2>{{ user.username }}'s Calendar</h2>
+
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+                {% for appointment in appointments %}
+                {
+                    title: '{{ appointment.service_request.vehicle.make }} {{ appointment.service_request.vehicle.model }}',
+                    start: '{{ appointment.scheduled_date }}',
+                    url: "{% url 'job_detail' appointment.service_request.id %}",
+                    allDay: true
+                },
+                {% endfor %}
+            ]
+        });
+
+        calendar.render();
+    });
+</script>
+{% endblock %}

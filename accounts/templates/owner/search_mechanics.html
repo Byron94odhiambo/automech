@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Mechanics{% endblock %}
+
+{% block content %}
+<div class="search-page-container">
+    <h2>Search for a Mechanic</h2>
+
+    <form method="get" class="search-page-form">
+        {{ form.as_p }}
+        <button type="submit" class="search-page-btn search-page-btn-primary">Search</button>
+    </form>
+
+    <h3>Results</h3>
+    <ul class="search-page-results-list">
+        {% for mechanic in mechanics %}
+            <li class="search-page-result-item">
+                <h4>{{ mechanic.user.username }}</h4>
+                <p>{{ mechanic.specialty }} - {{ mechanic.city }}, {{ mechanic.state }}</p>
+            </li>
+        {% empty %}
+            <li class="search-page-no-results">No mechanics found in the specified location.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

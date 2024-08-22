@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Details{% endblock %}
+
+{% block content %}
+<div class="job-details-container">
+    <h2 class="job-title">Job Details for {{ job.vehicle.make }} {{ job.vehicle.model }}</h2>
+
+    <!-- Job Information -->
+    <div class="job-info">
+        <p><strong>Service Type:</strong> {{ job.issue_description }}</p>
+        <p><strong>Status:</strong> {{ job.get_status_display }}</p>
+        <p><strong>Assigned Mechanic:</strong> {{ job.mechanic.user.username }}</p>
+        <p><strong>Service Center:</strong> {{ job.company.name }}</p>
+        <p><strong>Scheduled Date:</strong> {{ job.appointment.scheduled_date|date:"M d, Y H:i" }}</p>
+        <p><strong>Location:</strong> {{ job.appointment.location }}</p>
+    </div>
+
+    <!-- Status Update Form -->
+    <form method="post" class="status-update-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="status">Update Status:</label>
+            {{ form.status }}
+        </div>
+        <button type="submit" class="btn btn-primary">Update Status</button>
+    </form>
+
+    <!-- Back Link -->
+    <a href="{% url 'assigned_jobs' %}" class="btn btn-secondary">Back to Assigned Jobs</a>
+</div>
+{% endblock %}

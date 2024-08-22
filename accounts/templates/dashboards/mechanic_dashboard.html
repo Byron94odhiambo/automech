@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Mechanic Dashboard{% endblock %}
+
+{% block content %}
+<div class="mechanic-dashboard-container">
+    <h2 class="mechanic-dashboard-title">Welcome, {{ user.username }}!</h2>
+
+    <!-- Profile Card -->
+    <div class="mechanic-profile-card">
+        <img src="{% if user.mechanic.profile_picture %}{{ user.mechanic.profile_picture.url }}{% else %}{% static 'accounts/img/default1.jpg' %}{% endif %}" alt="Profile Picture" class="mechanic-profile-pic">
+        <div class="mechanic-profile-info">
+            <h3 class="mechanic-name">{{ user.username }}</h3>
+            <p class="mechanic-specialty"><strong>Specialty:</strong> {{ user.mechanic.specialty }}</p>
+            <p class="mechanic-experience"><strong>Experience:</strong> {{ user.mechanic.experience_years }} years</p>
+            <a href="{% url 'profile' %}" class="btn manage-profile-btn">Manage Profile</a>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="mechanic-summary-cards">
+        
+        <!-- Assigned Jobs Card -->
+        <div class="mechanic-card">
+            <h3>Assigned Jobs</h3>
+            <div class="mechanic-card-content">
+                <i class="fas fa-briefcase mechanic-icon"></i>
+                <p class="mechanic-job-count">{{ assigned_jobs_count }}</p>
+            </div>
+            <a href="{% url 'assigned_jobs' %}" class="btn mechanic-card-btn">View Assigned Jobs</a>
+        </div>
+
+        <!-- Completed Jobs Card -->
+        <div class="mechanic-card">
+            <h3>Completed Jobs</h3>
+            <div class="mechanic-card-content">
+                <i class="fas fa-check mechanic-icon"></i>
+                <p class="mechanic-job-count">{{ completed_jobs_count }}</p>
+            </div>
+            <a href="{% url 'completed_jobs' %}" class="btn mechanic-card-btn">View Completed Jobs</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container-unique">
+    <h2 class="profile-title-unique">My Profile</h2>
+    
+    <!-- Profile Picture and Information -->
+    <div class="profile-info-section-unique">
+        <img src="{% if profile.profile_picture %}{{ profile.profile_picture.url }}{% else %}{% static 'accounts/img/default1.jpg' %}{% endif %}" alt="Profile Picture" class="profile-pic-unique">
+        <div class="profile-info-unique">
+            <p><strong>Name:</strong> {{ profile.user.username }}</p>
+            <p><strong>Specialty:</strong> {{ profile.specialty }}</p>
+            <p><strong>Experience:</strong> {{ profile.experience_years }} years</p>
+            <a href="{% url 'mechanic_update_profile' %}" class="btn-unique">Edit Profile</a>
+        </div>
+    </div>
+
+    <!-- Change Password Form -->
+    <div class="change-password-form-unique">
+        <h3>Change Password</h3>
+        <form method="post" action="{% url 'password_change' %}">
+            {% csrf_token %}
+            {{ password_form.as_p }}
+            <button type="submit" class="btn-secondary-unique">Change Password</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

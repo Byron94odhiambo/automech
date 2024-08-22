@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Vehicle{% endblock %}
+
+{% block content %}
+<div class="edit-vehicle-container">
+    <h2 class="edit-vehicle-title">Edit Vehicle Details</h2>
+    <form method="post" class="edit-vehicle-form">
+        {% csrf_token %}
+        <div class="edit-vehicle-form-group">
+            {{ form.make.label_tag }}
+            {{ form.make }}
+        </div>
+        <div class="edit-vehicle-form-group">
+            {{ form.model.label_tag }}
+            {{ form.model }}
+        </div>
+        <div class="edit-vehicle-form-group">
+            {{ form.year.label_tag }}
+            {{ form.year }}
+        </div>
+        <div class="edit-vehicle-form-group">
+            {{ form.vin.label_tag }}
+            {{ form.vin }}
+        </div>
+        <div class="edit-vehicle-form-group">
+            {{ form.current_status.label_tag }}
+            {{ form.current_status }}
+        </div>
+        <div class="edit-vehicle-form-group">
+            {{ form.warranty_info.label_tag }}
+            {{ form.warranty_info }}
+        </div>
+        <button type="submit" class="edit-vehicle-btn">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

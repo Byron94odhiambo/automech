@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Service Request Details{% endblock %}
+
+{% block content %}
+<div class="service-request-detail-container">
+    <h2>Service Request Details</h2>
+    
+    <!-- Vehicle Information -->
+    <div class="vehicle-info">
+        <h3>Vehicle Information</h3>
+        <p><strong>Make:</strong> {{ service_request.vehicle.make }}</p>
+        <p><strong>Model:</strong> {{ service_request.vehicle.model }}</p>
+        <p><strong>Year:</strong> {{ service_request.vehicle.year }}</p>
+        <p><strong>VIN:</strong> {{ service_request.vehicle.vin }}</p>
+    </div>
+    
+    <!-- Service Request Information -->
+    <div class="service-request-info">
+        <h3>Service Request Information</h3>
+        <p><strong>Issue Description:</strong> {{ service_request.issue_description }}</p>
+        <p><strong>Status:</strong> {{ service_request.status }}</p>
+        <p><strong>Mechanic:</strong> {% if service_request.mechanic %}{{ service_request.mechanic.user.username }}{% else %}Not assigned{% endif %}</p>
+        <p><strong>Company:</strong> {% if service_request.company %}{{ service_request.company.name }}{% else %}Not assigned{% endif %}</p>
+        <p><strong>Date Created:</strong> {{ service_request.created_at|date:"d M Y, H:i" }}</p>
+        <p><strong>Last Updated:</strong> {{ service_request.updated_at|date:"d M Y, H:i" }}</p>
+    </div>
+    
+    <!-- Feedback Section (if applicable) -->
+    {% if service_request.feedback %}
+    <div class="feedback-section">
+        <h3>Customer Feedback</h3>
+        <p>{{ service_request.feedback }}</p>
+    </div>
+    {% endif %}
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        {% if service_request.status != 'completed' %}
+        <a href="{% url 'give_feedback' service_request.id %}" class="btn">Provide Feedback</a>
+        {% endif %}
+        <a href="{% url 'service_requests' %}" class="btn btn-secondary">Back to Service Requests</a>
+    </div>
+</div>
+{% endblock %}

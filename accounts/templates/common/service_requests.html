@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Service Requests{% endblock %}
+
+{% block content %}
+<div class="service-requests-container">
+    <h2>Service History</h2>
+    <ul class="service-requests-list">
+        {% for request in requests %}
+            <li class="service-request-item">
+                <div class="request-info">
+                    <h3>{{ request.vehicle.make }} {{ request.vehicle.model }} ({{ request.vehicle.year }})</h3>
+                    <p><strong>Issue:</strong> {{ request.issue_description }}</p>
+                    <p><strong>Status:</strong> <span class="status {{ request.status|lower }}">{{ request.status }}</span></p>
+                </div>
+                <a href="{% url 'service_request_detail' request.id %}" class="btn view-details-btn">View Details</a>
+
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Give Feedback{% endblock %}
+
+{% block content %}
+<div class="feedback-container">
+    <h2>Give Feedback</h2>
+    <div class="feedback-info">
+        <h3>{{ service_request.vehicle.make }} {{ service_request.vehicle.model }}</h3>
+        <p><strong>Service:</strong> {{ service_request.issue_description }}</p>
+    </div>
+
+    <form method="post" class="feedback-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.feedback.label_tag }}
+            {{ form.feedback }}
+        </div>
+        
+        <div class="form-group rating-group">
+            {{ form.rating.label_tag }}
+            <div class="rating-option">
+                {{ form.rating }}
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+
+    <a href="{% url 'vehicle_detail' service_request.vehicle.id %}" class="btn btn-secondary">Back to Vehicle Details</a>
+</div>
+{% endblock %}

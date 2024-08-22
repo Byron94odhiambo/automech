@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="logout-confirmation-container">
+    <div class="logout-message">
+        <h2>You have been logged out successfully.</h2>
+        <p>If you wish to log in again, please click the button below.</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login Again</a>
+    </div>
+</div>
+{% endblock %}

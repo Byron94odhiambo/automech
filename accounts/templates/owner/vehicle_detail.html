@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Vehicle Details{% endblock %}
+
+{% block content %}
+<div class="vehicle-detail-container">
+    <h2 class="vehicle-title">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</h2>
+
+    <!-- Vehicle Information -->
+    <div class="vehicle-info">
+        <p><strong>VIN:</strong> {{ vehicle.vin }}</p>
+        <p><strong>Owner:</strong> {{ vehicle.owner.user.username }}</p>
+    </div>
+
+    <!-- Service History -->
+    <h3 class="section-title">Service History</h3>
+    <ul class="service-history-list">
+        {% for service in service_history %}
+        <li class="service-history-item">
+            <p>
+                <strong>{{ service.created_at|date:"M d, Y H:i" }}:</strong> {{ service.issue_description }} - {{ service.status }}
+                {% if service.status == 'completed' and not service.feedback %}
+                    <a href="{% url 'give_feedback' service.id %}" class="feedback-link">Give Feedback</a>
+                {% elif service.feedback %}
+                    <p><strong>Feedback:</strong> {{ service.feedback }}</p>
+                {% endif %}
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Actions -->
+    <div class="action-buttons">
+        <a href="{% url 'book_service_appointment' vehicle.id %}" class="btn">Book a Service</a>
+        <a href="{% url 'vehicle_list' %}" class="btn btn-secondary">Back to Vehicle List</a>
+        <a href="{% url 'edit_vehicle' vehicle.id %}" class="btn btn-warning">Edit Vehicle</a>
+        <form action="{% url 'delete_vehicle' vehicle.id %}" method="post" class="delete-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Vehicle</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

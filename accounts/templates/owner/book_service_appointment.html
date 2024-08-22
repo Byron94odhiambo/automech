@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Service Appointment{% endblock %}
+
+{% block content %}
+<div class="book-service-container">
+    <h2 class="book-service-title">Book Service Appointment for {{ vehicle.make }} {{ vehicle.model }}</h2>
+    <form method="post" class="book-service-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="book-service-submit-btn">Book Appointment</button>
+    </form>
+</div>
+{% endblock %}

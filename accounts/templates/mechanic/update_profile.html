@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Mechanic Profile{% endblock %}
+
+{% block content %}
+<div class="mechanic-profile-update-container">
+    <h2 class="mechanic-profile-update-title">Update Profile</h2>
+
+    <form method="post" enctype="multipart/form-data" class="mechanic-profile-update-form">
+        {% csrf_token %}
+        
+        <div class="mechanic-details-section">
+            <h3 class="section-title">Mechanic Details</h3>
+            {{ mechanic_form.as_p }}
+        </div>
+        
+        <div class="profile-picture-section">
+            <h3 class="section-title">Profile Picture</h3>
+            {{ picture_form.as_p }}
+        </div>
+        
+        <button type="submit" class="btn mechanic-profile-save-btn">Save Changes</button>
+    </form>
+
+    <a href="{% url 'mechanic_dashboard' %}" class="btn btn-secondary mechanic-back-dashboard-btn">Back to Dashboard</a>
+</div>
+{% endblock %}

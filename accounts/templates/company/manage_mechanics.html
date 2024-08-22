@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Mechanics{% endblock %}
+
+{% block content %}
+    <h2>Manage Mechanics</h2>
+    <ul>
+        {% for mechanic in mechanics %}
+            <li>{{ mechanic.user.username }} - Specialty: {{ mechanic.specialty }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

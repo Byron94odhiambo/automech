@@ -1,0 +1,283 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Auto Service App{% endblock %}</title>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Responsive Design -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .navbar {
+            background-color: #007bff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            flex-wrap: wrap; /* Allow navbar items to wrap */
+        }
+        
+        .navbar h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+        }
+
+        .navbar .menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+        }
+        
+        .navbar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap; /* Allow links to wrap if necessary */
+        }
+        
+        .navbar nav ul li {
+            display: inline;
+        }
+        
+        .navbar nav ul li a,
+        .navbar nav ul li button.logout-button {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap; /* Prevent text from breaking into multiple lines */
+            display: inline-block;
+        }
+
+        .navbar nav ul li a:hover,
+        .navbar nav ul li button.logout-button:hover {
+            text-decoration: underline;
+        }
+        
+        .navbar form {
+            display: inline;
+            margin: 0;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-grow: 1;
+        }
+        
+        .profile-card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .profile-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-card p {
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0.5rem 0;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .card h3 {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .card p {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto; /* Ensure the footer is pushed to the bottom */
+            width: 100%;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 1.2rem;
+                margin-left: 3rem; /* Ensure space for the menu icon */
+            }
+
+            .navbar .menu-icon {
+                display: block;
+            }
+        
+            .navbar nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                background-color: #007bff;
+                padding-top: 1rem;
+                position: absolute;
+                top: 3rem;
+                left: 0;
+            }
+
+            .navbar nav ul.active {
+                display: flex;
+            }
+        
+            .navbar nav ul li {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 1rem;
+                padding-left: 1rem;
+            }
+        
+            .logout-button {
+                padding: 0.5rem 0.75rem; /* Adjust padding for smaller screens */
+                width: 100%; /* Ensure the button spans full width on smaller screens */
+            }
+        
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <span class="menu-icon" onclick="toggleMenu()">&#9776;</span> <!-- Hamburger menu icon -->
+            <h1>Smartmech</h1>
+            <nav>
+                <ul id="nav-links">
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'owner' %}
+                            <li><a href="{% url 'owner_dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'vehicle_list' %}">My Vehicles</a></li>
+                            <li><a href="{% url 'service_requests' %}">Service Requests</a></li>
+                        {% elif user.role == 'mechanic' %}
+                            <li><a href="{% url 'mechanic_dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'assigned_jobs' %}">Assigned Jobs</a></li>
+                            <li><a href="{% url 'completed_jobs' %}">Completed Jobs</a></li>
+                        {% elif user.role == 'company' %}
+                            <li><a href="{% url 'company_dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'manage_mechanics' %}">Manage Mechanics</a></li>
+                            <li><a href="{% url 'service_requests' %}">Service Requests</a></li>
+                        {% endif %}
+                        <li>
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">Logout</button>
+                            </form>
+                        </li>
+                        
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                        <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Smartmech</p>
+    </footer>
+
+    <script src="{% static 'accounts/js/script.js' %}"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/locales-all.min.js"></script>
+    
+    <!-- Responsive Navbar Script -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
