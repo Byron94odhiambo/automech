@@ -8,14 +8,66 @@
     <title>Welcome to SmartMech</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <style>
+        /* About SmartMech Styles */
+.about-company {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: left; /* Align text to the left for a more professional look */
+}
+
+.about-company h2 {
+    color: #007bff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-text {
+    flex: 1 1 50%;
+    padding-right: 2rem;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+}
+
+.about-image {
+    flex: 1 1 40%;
+    text-align: center;
+}
+
+.about-image img.responsive-image {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+        /* Base styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         .header {
@@ -23,58 +75,352 @@
             color: white;
             padding: 1rem 2rem;
             text-align: center;
+            border-bottom: 2px solid #0056b3;
         }
 
         .header h1 {
             margin: 0;
             font-size: 2.5rem;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
+        /* Responsive container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+            flex-grow: 1; /* This ensures the container expands to push the footer down */
+        }
+
+        /* Section styles */
+        section {
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #007bff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        section p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* Vision & Mission styles */
+        .vision-mission {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .vision-mission .vision, .vision-mission .mission {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .vision-mission .vision h3, .vision-mission .mission h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .vision-mission .vision h3::after, .vision-mission .mission h3::after {
+            content: "";
+            width: 50px;
+            height: 4px;
+            background-color: #007bff;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+        }
+
+        .vision-mission .vision p, .vision-mission .mission p {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* Flexbox for cards */
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: #ffffff;
+            color: #333;
+            padding: 1rem;
+            border-radius: 10px;
+            flex: 1 1 calc(25% - 2rem);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* Main content section */
         .main-content {
-            flex: 1;
             padding: 2rem;
             text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
         }
 
         .main-content h2 {
             color: #333;
             font-size: 2rem;
             margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .main-content p {
             color: #555;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 2rem;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
         }
 
         .cta-button {
             background-color: #007bff;
             color: white;
             padding: 0.75rem 1.5rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            font-weight: 600;
         }
 
         .cta-button:hover {
             background-color: #0056b3;
         }
 
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .review-slide {
+            width: 250px;
+            padding: 1.5rem;
+            background-color: white;
+            color: #333;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .review-slide h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .review-slide p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        /* FAQ styles */
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: relative;
+            padding: 1rem;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+            padding: 1rem;
+            margin: 0;
+            color: #555;
+        }
+
+        .faq-item.active p {
+            display: block;
+        }
+
+        .faq-item.active h3 {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Footer styles */
         .footer {
-            background-color: #333;
+            background-color: #007bff;
             color: white;
             text-align: center;
             padding: 1rem;
             margin-top: auto;
+            border-top: 2px solid #0056b3;
+            flex-shrink: 0; /* Ensures the footer stays at the bottom */
         }
 
         .footer p {
             margin: 0;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .footer .social-icons {
+            margin-top: 1rem;
+        }
+
+        .footer .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer .social-icons a:hover {
+            color: #ffdd57;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+        
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+                text-align: center; /* Center text on smaller screens for better readability */
+            }
+        
+            .about-image {
+                text-align: center;
+            }
+        }
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                flex: 1 1 100%;
+            }
+
+            .review-slide {
+                width: 80%;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            section p {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .review-slide {
+                width: 90%;
+            }
         }
     </style>
 </head>
@@ -83,14 +429,141 @@
         <h1>SmartMech</h1>
     </header>
 
-    <main class="main-content">
-        <h2>Your Go-To Platform for Vehicle Maintenance</h2>
-        <p>Book services, manage vehicles, and connect with mechanics, all in one place.</p>
-        <a href="{% url 'register' %}" class="cta-button">Get Started</a>
-    </main>
+    <div class="container">
+        <section class="about-company">
+            <h2>About SmartMech</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>SmartMech is a cutting-edge platform that connects vehicle owners with trusted mechanics and service providers. We are dedicated to making vehicle maintenance seamless, efficient, and accessible to everyone.</p>
+                    <p>Our innovative approach ensures that vehicle owners receive top-notch service, while mechanics can efficiently manage their schedules and reach more customers. Whether it's regular maintenance or an emergency repair, SmartMech is your go-to solution for all vehicle-related needs.</p>
+                </div>
+                <div class="about-image">
+                    <img src="{% static 'images/landing-bg.jpg' %}" alt="SmartMech Platform" class="responsive-image">
+                </div>
+            </div>
+        </section>
+
+        <section class="vision-mission">
+            <h2>Our Vision & Mission</h2>
+            <div class="vision">
+                <h3>Vision</h3>
+                <p>To revolutionize vehicle maintenance by providing easy access to top-quality services.</p>
+            </div>
+            <div class="mission">
+                <h3>Mission</h3>
+                <p>To connect vehicle owners with trusted mechanics and service providers through a seamless and efficient platform.</p>
+            </div>
+        </section>
+
+        <section class="what-we-offer">
+            <h2>What We Offer</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Trusted Mechanics</h3>
+                    <p>We partner with verified and experienced mechanics to ensure the best service for your vehicle.</p>
+                </div>
+                <div class="card">
+                    <h3>Convenient Booking</h3>
+                    <p>Easily book services at your convenience with just a few clicks, anytime, anywhere.</p>
+                </div>
+                <div class="card">
+                    <h3>Comprehensive Management</h3>
+                    <p>Manage all aspects of your vehicle maintenance through a single, user-friendly platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <h2>Your Go-To Platform for Vehicle Maintenance</h2>
+            <p>Book services, manage vehicles, and connect with mechanics, all in one place.</p>
+            <a href="{% url 'register' %}" class="cta-button">Get Started</a>
+        </main>
+
+        <section class="reviews">
+            <h2>Customer Reviews</h2>
+            <div class="slideshow-container">
+                <div class="slides-wrapper">
+                    <div class="slide">
+                        <div class="review-slide">
+                            <h3>Jane Doe</h3>
+                            <p>"SmartMech made it so easy to find a reliable mechanic. I’m extremely satisfied with the service!"</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="review-slide">
+                            <h3>John Smith</h3>
+                            <p>"The platform is user-friendly, and the booking process is seamless. Highly recommend SmartMech!"</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="review-slide">
+                            <h3>Mary Johnson</h3>
+                            <p>"Great experience! The mechanic was professional and my car is running perfectly now."</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="review-slide">
+                            <h3>Michael Brown</h3>
+                            <p>"SmartMech's service was outstanding. The mechanic arrived on time and fixed my car quickly."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I book a service?</h3>
+                <p>Simply sign up, log in to your account, and choose the service you need. You can book a service with just a few clicks.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Are the mechanics trustworthy?</h3>
+                <p>All mechanics on our platform are thoroughly vetted and have a proven track record of providing excellent service.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What happens if I need to cancel a booking?</h3>
+                <p>You can cancel your booking from your dashboard at any time before the scheduled service. Check our cancellation policy for more details.</p>
+            </div>
+        </section>
+    </div>
 
     <footer class="footer">
         <p>&copy; 2024 SmartMech. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/your_profile" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/your_number" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+        </div>
     </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- FontAwesome for icons -->
+
+    <script>
+        let currentSlide = 0;
+        const slidesWrapper = document.querySelector('.slides-wrapper');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlides() {
+            slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            currentSlide++;
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+        }
+
+        setInterval(showSlides, 5000); // Change slide every 5 seconds
+
+        // FAQ toggle functionality
+        const faqItems = document.querySelectorAll('.faq-item h3');
+
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const faqItem = item.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
